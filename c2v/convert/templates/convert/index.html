@@ -1,0 +1,74 @@
+{% extends 'convert/base.html' %} {% block content %}
+<div class="row px-4">
+  <div class="col-12">
+    <div id="d-url" class="d-none">
+      変換しています：<span class="text-primary">https://abema.tv/video/episode/444-15_s35_p146</span></div>
+    <div id="stdout" class="overflow-scroll d-none" style="max-height: 200px"></div>
+  </div>
+  <div class="col-12">
+    <!-- <a href="#" id="aaa">aaaa</a>
+    <a href="down/" id="bbb">bbbb</a>
+    <a href="downRem/" id="ccc">cccc</a> -->
+    <form action="{% url 'convert:download' %}" method="post" class="form">
+      {% csrf_token %}
+      <div class="row">
+        <!-- <div class="offset-sm-6 col-sm-6"> -->
+        <div class="col-sm-6">
+          <label class="col-form-label">
+            <span class="fw-bold text-decoration-underline"> {{user.first_name}} {{user.last_name}} </span>
+            さんようこそ！
+            <a href="{% url 'convert:logout' %}" class="fs-6">ログアウト</a>
+          </label>
+        </div>
+        <div class="col-6 d-none d-sm-block">
+          <label class="col-form-label">ストリーミングのURL</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="row pb-1">
+            <label class="col-4 col-form-label">サイト</label>
+            <div class="col-8">
+              <select name="site" class="form-control">
+                <option value="abema">ABEMA</option>
+                <option value="amazon">amazon prime</option>
+              </select>
+            </div>
+            <small class="text-secondary">※アカウントパスワードを紐づけて保存するためだけの情報です</small>
+          </div>
+          <div class="row pb-1">
+            <label class="col-4 col-form-label">アカウント</label>
+            <div class="col-8">
+              <input type="text" name="aca" class="form-control" />
+            </div>
+          </div>
+          <div class="row pb-1">
+            <label class="col-4 col-form-label">パスワード</label>
+            <div class="col-8">
+              <input type="text" name="pass" class="form-control" />
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-sm-3 align-self-end">
+              <input class="btn btn-sm btn-primary" type="submit" value="変換！" />
+            </div>
+            <small class="text-danger">※変換中は画面をいじらないでね。連続ダウンロードしてると、ポップアップが出ることがあったら、OKを押してね</small>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row d-block d-sm-none">
+            <label class="col-form-label">ストリーミングのURL</label>
+          </div>
+          <div class="row">
+            <span name="warn" class="d-none text-danger"></span>
+            <textarea class="form-control" rows="20" name="urls"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% load static %}
+<script type="text/javascript" src="{% static 'convert/convert.js' %}"></script>
+
+{% endblock %}
