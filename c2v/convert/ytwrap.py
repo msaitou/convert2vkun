@@ -28,6 +28,7 @@ with yt_dlp.YoutubeDL(opt) as ydl:  # yt_dlp.YoutubeDL()をforで繰り返すと
     # with open(progF, mode='w') as f:
     #   json.dump(progData, f, indent=2)
 print("finish1")
+#saito/saito1234!,admin/1234qwer!
 # ★ログイン
 # ★ダウンロード中のURLを画面に表示
 # 画面の排他→やらない
