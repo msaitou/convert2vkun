@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0mxmaoplmohn+co!@xjl)ecx2a7i3d()iz=%!zjy#jx&=jdo-f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["sai10app.mydns.jp", "localhost", "app1.sai10.mydns.jp"]
+ALLOWED_HOSTS = ["sai10app.mydns.jp", "localhost", "app1.sai10.mydns.jp", "192.168.0.13", "192.168.0.13:8000"]
 
 
 # Application definition
