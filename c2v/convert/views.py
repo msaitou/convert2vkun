@@ -180,6 +180,9 @@ def do(request, *args, **kwargs):
     バッチを実行
     :rtype: generator
     """
+    env = os.environ.copy()
+    #　ubuntuでこれ入れないと動かん
+    # env['PATH'] = '/home/clonecopyfake/.local/bin:/home/clonecopyfake/work/convert2vkun/.venv/bin:' + env['PATH']
     return linebreaksbr(run_process_as_generator(cmd, shell=True))
 
   body = request.POST

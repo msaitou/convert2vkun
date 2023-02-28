@@ -7,4 +7,4 @@ def cli_to_api(*opts):
         diff['postprocessors'] = [pp for pp in diff['postprocessors'] if pp not in default['postprocessors']]
     return diff
 # 以下にcliオプションを書いて実行
-cli_to_api('--embed-sub')
+cli_to_api('--proxy')

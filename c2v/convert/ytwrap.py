@@ -10,9 +10,11 @@ opt = {
     'format': 'worst.3',
     "outtmpl": "%(title)s.%(ext)s",
     "cachedir": False,
-    'progress_with_newline': True
+    'progress_with_newline': True,
     # 'username': 'nsksaitou@gmail.com',
     # 'password': 'nsksaitou2wsx',
+    # "proxy":"https://49.212.143.246:6666/",
+    # "proxy":"https://43.153.188.81:3128/",
 }
 if len(args) == 4 and args[2] and args[3]:
   opt["username"] = args[2]
