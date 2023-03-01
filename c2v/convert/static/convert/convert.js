@@ -52,7 +52,7 @@ function submitConvertDo(e) {
   let dUrlBlock = document.querySelector("#d-url");
   let dUrl = document.querySelector("#d-url>span");
   dUrlBlock.classList.replace("d-none", "d-block");
-  dUrl.text = trimedUrls.submit;
+  dUrl.textContent = trimedUrls.submit;
 
   console.log(...fd.entries());
   xhr.open("POST", "do/");

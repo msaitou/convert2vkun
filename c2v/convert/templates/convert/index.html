@@ -1,8 +1,7 @@
 {% extends 'convert/base.html' %} {% block content %}
 <div class="row px-4">
   <div class="col-12">
-    <div id="d-url" class="d-none">
-      変換しています：<span class="text-primary">https://abema.tv/video/episode/444-15_s35_p146</span></div>
+    <div id="d-url" class="d-none">変換しています：<span class="text-primary"></span></div>
     <div id="stdout" class="overflow-scroll d-none" style="max-height: 200px"></div>
   </div>
   <div class="col-12">
@@ -31,10 +30,11 @@
             <div class="col-8">
               <select name="site" class="form-control">
                 <option value="abema">ABEMA</option>
-                <option value="amazon">amazon prime</option>
               </select>
             </div>
-            <small class="text-secondary">※アカウントパスワードを紐づけて保存するためだけの情報です</small>
+            <small class="text-secondary"
+              >※アカウントパスワードを紐づけて保存するためだけの情報です(今はabemaだけ)</small
+            >
           </div>
           <div class="row pb-1">
             <label class="col-4 col-form-label">アカウント</label>
@@ -52,7 +52,20 @@
             <div class="col-sm-3 align-self-end">
               <input class="btn btn-sm btn-primary" type="submit" value="変換！" />
             </div>
-            <small class="text-danger">※変換中は画面をいじらないでね。連続ダウンロードしてると、ポップアップが出ることがあったら、OKを押してね</small>
+            <small class="text-danger"
+              >※変換中は画面をいじらないでね。連続ダウンロードしてると、ポップアップが出ることがあったら、OKを押してね</small
+            ><br>
+            <small class="text-warning"
+              >※連続ダウンロードしてるよってポップアップが出たら許可してね</small
+            ><br>
+          </div>
+          <div class="row pb-1">
+            <label class="col-4 col-form-label">対象サイト</label>
+            <div class="col-8">
+              <a href="https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md" target="_blank" rel="noreferrer"
+                >ログインしないと見れないのは、abemaしか対応してません（たぶん）</a
+              >
+            </div>
           </div>
         </div>
         <div class="col">
@@ -61,7 +74,7 @@
           </div>
           <div class="row">
             <span name="warn" class="d-none text-danger"></span>
-            <textarea class="form-control" rows="20" name="urls"></textarea>
+            <textarea class="form-control" rows="20" name="urls" placeholder="改行で複数に対応"></textarea>
           </div>
         </div>
       </div>

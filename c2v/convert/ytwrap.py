@@ -26,17 +26,14 @@ with yt_dlp.YoutubeDL(opt) as ydl:  # yt_dlp.YoutubeDL()をforで繰り返すと
   for url in filter(lambda x: not x[1], progData.items()):
     # print(url[0])
     ydl.download([url[0]])
-    # progData[url[0]] = True
-    # with open(progF, mode='w') as f:
-    #   json.dump(progData, f, indent=2)
 print("finish1")
-#saito/saito1234!,admin/1234qwer!
-# ★ログイン
-# ★ダウンロード中のURLを画面に表示
-# 画面の排他→やらない
-# 変換処理の排他→やらない
-# ★引数の受け渡し方法　DB　ファイル
-# ★複数URL時の連続ダウンロード処理
-# ★進捗の監視と表現
-# ★サブミット時のラップ？
-# ★ファイル名の取得
+# ちゃんとそとから見れるようにする
+# SSL対応する
+# SSLの自動更新処理追加
+# 連続うダウンロードしてるよってポップアップが出たら許可してねという
+# gunicornでやる？
+# corsエラー
+# ★prime外す、youtubeはできるよっていう
+# ★変換していますURLが更新されない
+# ★favicon
+# 失敗したことを書く
