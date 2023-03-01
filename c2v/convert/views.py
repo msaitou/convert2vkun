@@ -1,5 +1,5 @@
-from subprocess import PIPE
 import subprocess
+from subprocess import PIPE
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect, FileResponse
@@ -125,7 +125,8 @@ class MyLogger:
 #   print(proc.stderr.decode('utf-8').split('\n'))
 #   print("finish2")
 #   return FileResponse(open(ffName, "rb"), as_attachment=True, filename=ffName)
-dPath = "C:\\workspace\\convert2vkun\\c2v\\"
+# dPath = "C:\\workspace\\convert2vkun\\c2v\\"
+dPath = ""
 
 
 @login_required
@@ -145,6 +146,14 @@ def fileRemove(request, *args, **kwargs):
     os.remove(ffName)
   return HttpResponse(status=200)
 
+# pythonコマンドのバージョンを規定する(主にlinux用)
+PY_VER = "3.11"
+pyCmd = "python"  # デフォはこれ
+str_ver = subprocess.run("python --version", shell=True, capture_output=True, text=True).stdout
+if PY_VER not in str_ver:
+  pyCmd = f"python{PY_VER}"
+import locale
+ENC = locale.getencoding().lower()
 
 @login_required
 def do(request, *args, **kwargs):
@@ -172,22 +181,29 @@ def do(request, *args, **kwargs):
     :rtype: generator
     """
     for line in gen:
-      # 日本語をファイル名にするときにsjisを指定しないとエラーになった
-      yield '{}<br />\n'.format(escape(smart_str(line, encoding="sjis")))
+      # 日本語をファイル名にするときにsjisを指定しないとエラーになったけど気のせい
+      yield '{}<br />\n'.format(escape(smart_str(line, encoding=ENC)))
+      # yield '{}<br />\n'.format(escape(smart_str(line)))
 
   def task(cmd):
     """
     バッチを実行
     :rtype: generator
     """
-    env = os.environ.copy()
-    #　ubuntuでこれ入れないと動かん
+    # gcpのubuntuではこれ入れないと動かん
+    # env = os.environ.copy()
     # env['PATH'] = '/home/clonecopyfake/.local/bin:/home/clonecopyfake/work/convert2vkun/.venv/bin:' + env['PATH']
+    # return linebreaksbr(run_process_as_generator(cmd, shell=True,env=env))
+    # sourceをsubprocessで実行するためにはこれらしい
+    # http://mikanbako.blog.shinobi.jp/python/subprocess%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%A7%E3%82%B7%E3%82%A7%E3%83%AB%E3%81%AB%E4%BE%9D%E5%AD%98%E3%81%99%E3%82%8B%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%82%92%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AF%E3%80%81executable%E5%BC%95%E6%95%B0%E3%82%92%E5%BF%98%E3%82%8C%E3%81%9A%E3%81%AB
+    # BASH = '/bin/bash'
+    # return linebreaksbr(run_process_as_generator(cmd, shell=True, executable = BASH))
     return linebreaksbr(run_process_as_generator(cmd, shell=True))
 
   body = request.POST
   print("POST", body)
-  cmd = "python convert/ytwrap.py"
+  cmd = f"{pyCmd} convert/ytwrap.py"
+  # cmd = "printenv"
   for key in ["url", "aca", "pass",]:
     if body[key]:
       cmd += f" {body[key]}"
