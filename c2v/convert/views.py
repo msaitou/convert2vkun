@@ -216,6 +216,6 @@ def do(request, *args, **kwargs):
     print("完了")
 
 
-@receiver(request_finished)
-def signalmethod(sender, **kwargs):
-  print('シグナルが送られました。', sender, kwargs)  # 別スレッドになるのでメインプロセスでの画面操作等不可
+# @receiver(request_finished)
+# def signalmethod(sender, **kwargs):
+#   print('シグナルが送られました。', sender, kwargs)  # 別スレッドになるのでメインプロセスでの画面操作等不可

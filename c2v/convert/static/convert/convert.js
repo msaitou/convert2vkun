@@ -48,6 +48,7 @@ function submitConvertDo(e) {
   document.getElementsByName("urls")[0].value = trimedUrls.next;
 
   let stdoutBox = document.querySelector("#stdout");
+  stdoutBox.innerHTML = ""; // 空欄に初期化
   stdoutBox.classList.replace("d-none", "d-block");
   let dUrlBlock = document.querySelector("#d-url");
   let dUrl = document.querySelector("#d-url>span");
@@ -61,6 +62,8 @@ function submitConvertDo(e) {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       // 正常に受信完了した時の処理
       const d = this.response; // これで帰ってきたデータを取り出せます
+      stdoutBox.innerHTML = d;
+      stdoutBox.scrollTo(0, stdoutBox.scrollHeight);
       // console.log(d);
       let fLine = d.split("<br />").filter((f) => f.indexOf("[download] Destination:") > -1)[0];
       let fName = fLine.replace("[download] Destination:", "").trim();

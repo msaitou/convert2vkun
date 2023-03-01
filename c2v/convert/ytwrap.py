@@ -27,12 +27,13 @@ with yt_dlp.YoutubeDL(opt) as ydl:  # yt_dlp.YoutubeDL()をforで繰り返すと
     # print(url[0])
     ydl.download([url[0]])
 print("finish1")
-# ちゃんとそとから見れるようにする
-# SSL対応する
 # SSLの自動更新処理追加
-# 連続うダウンロードしてるよってポップアップが出たら許可してねという
 # gunicornでやる？
-# corsエラー
+# settingsファイルを切り替え
+# ★corsエラー
+# ★ちゃんとそとから見れるようにする
+# ★SSL対応する
+# ★連続うダウンロードしてるよってポップアップが出たら許可してねという
 # ★prime外す、youtubeはできるよっていう
 # ★変換していますURLが更新されない
 # ★favicon
