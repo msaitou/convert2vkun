@@ -9,8 +9,4 @@ urlpatterns = [
     path('do/', views.do, name='do'),
     path('download/', views.download, name='download'),
     path('fileRemove/', views.fileRemove, name='fileRemove'),
-    # ex: /polls/5/
-    # path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-    # # ex: /polls/5/results/
-    # path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
 ]

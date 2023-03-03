@@ -11,8 +11,8 @@ opt = {
     "outtmpl": "%(title)s.%(ext)s",
     "cachedir": False,
     'progress_with_newline': True,
-    # 'username': 'nsksaitou@gmail.com',
-    # 'password': 'nsksaitou2wsx',
+    # 'username': 'xxxx',
+    # 'password': 'xxxx',
     # "proxy":"https://49.212.143.246:6666/",
     # "proxy":"https://43.153.188.81:3128/",
 }
@@ -27,14 +27,3 @@ with yt_dlp.YoutubeDL(opt) as ydl:  # yt_dlp.YoutubeDL()をforで繰り返すと
     # print(url[0])
     ydl.download([url[0]])
 print("finish1")
-# SSLの自動更新処理追加
-# gunicornでやる？
-# settingsファイルを切り替え
-# ★corsエラー
-# ★ちゃんとそとから見れるようにする
-# ★SSL対応する
-# ★連続うダウンロードしてるよってポップアップが出たら許可してねという
-# ★prime外す、youtubeはできるよっていう
-# ★変換していますURLが更新されない
-# ★favicon
-# 失敗したことを書く
