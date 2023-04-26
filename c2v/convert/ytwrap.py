@@ -7,7 +7,7 @@ print("start1", args)
 # progData = {"https://abema.tv/video/episode/444-15_s90_p820": ""}  # 進捗状況データ
 progData = {args[1]: ""}
 opt = {
-    'format': 'worst.3',
+    'format': 'worst.4',
     "outtmpl": "%(title)s.%(ext)s",
     "cachedir": False,
     'progress_with_newline': True,
