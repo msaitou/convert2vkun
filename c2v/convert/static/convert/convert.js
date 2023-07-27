@@ -79,7 +79,8 @@ function submitConvertDo(e) {
 }
 function download(fName) {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "download/?f_name=" + encodeURI(fName));
+  let encFname = "download/?f_name=" + encodeURIComponent(fName);
+  xhr.open("GET", encFname);
   xhr.responseType = "blob"; //blob型のレスポンスを受け付ける
   xhr.onload = function () {
     if (this.status == 200) {
@@ -110,7 +111,8 @@ function download(fName) {
 }
 function fileRemove(fName) {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "fileRemove/?f_name=" + encodeURI(fName));
+  let encFname = "fileRemove/?f_name=" + encodeURIComponent(fName);
+  xhr.open("GET", encFname);
   xhr.onload = function () {
     if (this.status == 200) {
       let urls = document.getElementsByName("urls")[0].value;
