@@ -79,7 +79,7 @@ function submitConvertDo(e) {
 }
 function download(fName) {
   const xhr = new XMLHttpRequest();
-  let encFname = "download/?f_name=" + encodeURIComponent(fName);
+  let encFname = "download/?f_name=" + encodeURIComponent(escapeHtml(fName));
   xhr.open("GET", encFname);
   xhr.responseType = "blob"; //blob型のレスポンスを受け付ける
   xhr.onload = function () {
@@ -111,7 +111,7 @@ function download(fName) {
 }
 function fileRemove(fName) {
   const xhr = new XMLHttpRequest();
-  let encFname = "fileRemove/?f_name=" + encodeURIComponent(fName);
+  let encFname = "fileRemove/?f_name=" + encodeURIComponent(escapeHtml(fName));
   xhr.open("GET", encFname);
   xhr.onload = function () {
     if (this.status == 200) {
@@ -128,6 +128,20 @@ function changeSite() {
   document.getElementsByName("aca")[0].value = localStorage.getItem(`${site}_aca`);
   document.getElementsByName("pass")[0].value = localStorage.getItem(`${site}_pass`);
 }
+var escapeHtml = function(str) {
+	if (typeof str !== 'string') return str;
+	var patterns = {
+		'<' : '&lt;', 
+    '>' : '&gt;',
+		'&' : '&amp;',
+		'"' : '&quot;',
+    "'" : '&#x27;',
+		'`' : '&#x60;'
+	};
+	return str.replace(/<|>|&|"|'|`/g, function(match) {
+		return patterns[match];
+	});
+};
 const csrftoken = getCookie("csrftoken");
 const form = document.getElementsByTagName("form");
 form[0].addEventListener("submit", submitConvertDo); // submitイベントをオーバライド
