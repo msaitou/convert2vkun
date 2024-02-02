@@ -37,12 +37,26 @@ class IndexView(LoginRequiredMixin, generic.ListView):  # LoginRequiredMixinが�
     # return Question.objects.filter(pub_date__lte=timezone.now()
     #                                ).order_by('-pub_date')[:5]
 
+# 指定のファイル名
+def getConvertFileName(oriFileName):
+  # カレントディレクトリのファイルを取得
+  current_dir = os.listdir()
+  # .mp4 ファイルを抽出
+  mp4_files = [file for file in current_dir if file.endswith(".mp4")]
+
+  # ファイル名が一致するかどうかをチェック
+  for mp4_file in mp4_files:
+    mp4_file2 = mp4_file.replace("⧸", "")
+    if mp4_file == oriFileName or mp4_file2 == oriFileName:
+      return mp4_file
+
 dPath = ""
 @login_required
 def download(request, *args, **kwargs):
   print(request.GET)
   if "f_name" in request.GET:
     ffName = dPath + request.GET["f_name"]
+    ffName = getConvertFileName(ffName)
     return FileResponse(open(ffName, "rb"), as_attachment=True, filename=ffName)
   else:
     return HttpResponse(status=404)
@@ -52,6 +66,9 @@ def download(request, *args, **kwargs):
 def fileRemove(request, *args, **kwargs):
   if "f_name" in request.GET:
     ffName = dPath + request.GET["f_name"]
+    ffName = getConvertFileName(ffName)
+    # でmp4のファイルをベースに、リクエストされたファイル名と一致するか確認
+    # 無ければ、スラッシュっぽいのを消してチェックして、一致すればそれをダウンロードファイルとして採用
     os.remove(ffName)
   return HttpResponse(status=200)
 

@@ -85,10 +85,22 @@ function download(fName) {
   xhr.onload = function () {
     if (this.status == 200) {
       var blob = this.response; //レスポンス
+      var disposition = xhr.getResponseHeader('Content-Disposition');
+      var fName2 = fName; // スラッシュが無くてファイル名が異なってるやつ用
+      if (disposition && disposition.indexOf('attachment') !== -1) {
+        // 正規表現
+        var filenameRegex = /filename[^;=\n]=((['"]).*?\2|[^;\n]*)/;
+        var matches = filenameRegex.exec(disposition);
+        if (matches != null && matches[1]) {
+          // matches[1]でとれる⇒ filename*=utf-8''201911%E3%83%87%E3%83%BC%E3%82%BF.csv;
+          // 不要文字列を消して、デコードしてサーバからのファイル名を取得
+          fName2 = decodeURI(matches[1].replace(/['"]/g, '').replace('utf-8',''));
+        }
+      }
       //IEとその他で処理の切り分け
       if (navigator.appVersion.toString().indexOf(".NET") > 0) {
         //IE 10+
-        window.navigator.msSaveBlob(blob, fileName + ".pdf");
+        window.navigator.msSaveBlob(blob, fName2 + ".pdf");
       } else {
         //aタグの生成
         var a = document.createElement("a");
@@ -100,7 +112,7 @@ function download(fName) {
         //BlobオブジェクトURLをセット
         a.href = blobUrl;
         //ダウンロードさせるファイル名の生成
-        a.download = fName;
+        a.download = fName2;
         //クリックイベント発火
         a.click();
         fileRemove(fName);
