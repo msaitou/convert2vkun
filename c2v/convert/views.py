@@ -1,3 +1,5 @@
+# settings.py または他のファイル
+from django.conf import settings
 import subprocess
 from subprocess import PIPE
 from django.dispatch import receiver
@@ -18,6 +20,7 @@ import json
 import os
 
 import yt_dlp
+
 
 
 class Login(LoginView):
@@ -73,7 +76,8 @@ def fileRemove(request, *args, **kwargs):
   return HttpResponse(status=200)
 
 # pythonコマンドのバージョンを規定する(主にlinux用)
-PY_VER = "3.11"
+PY_VER = settings.DEFAULT_PY_VER
+# PY_VER = "3.13"
 pyCmd = "python"  # デフォはこれ
 str_ver = subprocess.run("python --version", shell=True, capture_output=True, text=True).stdout
 if PY_VER not in str_ver:

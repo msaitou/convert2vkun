@@ -1,0 +1,62 @@
+cd convert2vkun\c2v
+poetry.exe shell
+python.exe .\manage.py runserver localhost:8000
+
+でローカル起動
+
+win11にしたらいろいろコマンドが違う
+poetry env use python
+poetry.exe run python .\manage.py runserver localhost:8000
+poetry install
+でエラーになるので、
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+からbuildtoolsのインストールアプリを落として、
+C++によるデスクトップ開発　みたいなのだけ選択してインストールする
+
+エラーのやつ
+PS C:\work\convert2vkun\c2v> poetry install
+Installing dependencies from lock file
+
+Package operations: 7 installs, 0 updates, 0 removals
+
+  - Installing brotli (1.1.0): Failed
+
+PEP517 build of a dependency failed
+
+Backend subprocess exited when trying to invoke build_wheel
+
+    | Command '['C:\\Users\\peter\\AppData\\Local\\Temp\\tmprklv1oei\\.venv\\Scripts\\python.exe', 'C:\\Users\\peter\\AppData\\Roaming\\pypoetry\\venv\\Lib\\site-packages\\pyproject_hooks\\_in_process\\_in_process.py', 'build_wheel', 'C:\\Users\\peter\\AppData\\Local\\Temp\\tmpmp09wfre']' returned non-zero exit status 1.
+    |
+    | C:\Users\peter\AppData\Local\Temp\tmprklv1oei\.venv\Lib\site-packages\setuptools\_distutils\dist.py:289: UserWarning: Unknown distribution option: 'test_suite'
+    |   warnings.warn(msg)
+    | C:\Users\peter\AppData\Local\Temp\tmprklv1oei\.venv\Lib\site-packages\setuptools\dist.py:759: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+    | !!
+    |
+    |         ********************************************************************************
+    |         Please consider removing the following classifiers in favor of a SPDX license expression:
+    |
+    |         License :: OSI Approved :: MIT License
+    |
+    |         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+    |         ********************************************************************************
+    |
+    | !!
+    |   self._finalize_license_expression()
+    | running bdist_wheel
+    | running build
+    | running build_py
+    | creating bin\lib.win-amd64-cpython-313
+    | copying python\brotli.py -> bin\lib.win-amd64-cpython-313
+    | running build_ext
+    | <string>:70: DeprecationWarning: dep_util is Deprecated. Use functions from setuptools instead.
+    | building '_brotli' extension
+    | error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+Note: This error originates from the build backend, and is likely not a problem with poetry but one of the following issues with brotli (1.1.0)
+
+  - not supporting PEP 517 builds
+  - not specifying PEP 517 build requirements correctly
+  - the build requirements are incompatible with your operating system or Python version
+  - the build requirements are missing system dependencies (eg: compilers, libraries, headers).
+
+You can verify this by running pip wheel --no-cache-dir --use-pep517 "brotli (==1.1.0)".
